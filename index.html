@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google Search Console Friendly SEO Meta Tags -->
+    <title>EduPulse by Tiwari | Study Guides, Science Notes & Interactive Flashcards</title>
+    <meta name="description" content="EduPulse by Tiwari is an educational blog featuring simplified study guides, science and tech articles, exam preparation strategies, and 20 interactive visual flashcards.">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Anshu Tiwari">
+
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-body: #f4f7fb;
+            --bg-card: #ffffff;
+            --bg-nav: rgba(255, 255, 255, 0.92);
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --primary: #0284c7;
+            --cyan: #06b6d4;
+            --gradient: linear-gradient(135deg, #06b6d4 0%, #2563eb 100%);
+            --shadow: 0 10px 28px -6px rgba(15, 23, 42, 0.06);
+        }
+
+        [data-theme="dark"] {
+            --bg-body: #060b16;
+            --bg-card: #0f172a;
+            --bg-nav: rgba(6, 11, 22, 0.92);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: #1e293b;
+            --primary: #38bdf8;
+            --cyan: #22d3ee;
+            --shadow: 0 12px 32px -6px rgba(0, 0, 0, 0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+        }
+
+        body {
+            background: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.65;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ================= NAVBAR & CUSTOM SVG LOGO ================= */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: var(--bg-nav);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            padding: 12px 0;
+        }
+
+        .nav-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--text-main);
+        }
+
+        .brand-title {
+            font-size: 1.3rem;
+            font-weight: 800;
+            letter-spacing: -0.4px;
+            line-height: 1.1;
+        }
+
+        .brand-sub {
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 1.8px;
+            color: var(--primary);
+            text-transform: uppercase;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .search-wrap {
+            position: relative;
+        }
+
+        .search-wrap input {
+            padding: 9px 14px 9px 36px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--bg-body);
+            color: var(--text-main);
+            font-size: 0.88rem;
+            width: 230px;
+            outline: none;
+        }
+
+        .search-wrap input:focus {
+            border-color: var(--primary);
+        }
+
+        .search-wrap i {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .hamburger {
+            width: 42px;
+            height: 42px;
+            border-radius: 11px;
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+            color: var(--text-main);
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* 3-Line Menu Drawer */
+        .menu-drawer {
+            display: none;
+            position: absolute;
+            top: 70px;
+            right: 20px;
+            width: 265px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 14px;
+            box-shadow: var(--shadow);
+            z-index: 1001;
+        }
+
+        .menu-drawer.open {
+            display: block;
+            animation: dropIn 0.2s ease;
+        }
+
+        .drawer-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            color: var(--text-main);
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.92rem;
+        }
+
+        .drawer-item:hover {
+            background: var(--bg-body);
+            color: var(--primary);
+        }
+
+        .drawer-divider {
+            height: 1px;
+            background: var(--border);
+            margin: 10px 0;
+        }
+
+        .theme-control {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 12px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .theme-pill {
+            padding: 6px 14px;
+            border-radius: 20px;
+            border: none;
+            background: var(--gradient);
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.78rem;
+            cursor: pointer;
+        }
+
+        /* ================= HERO FEATURED ARTICLE ================= */
+        .hero {
+            padding: 36px 0 24px;
+        }
+
+        .featured-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            box-shadow: var(--shadow);
+        }
+
+        .featured-text {
+            padding: 38px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .tag-pill {
+            display: inline-block;
+            width: fit-content;
+            padding: 5px 13px;
+            border-radius: 20px;
+            background: rgba(6, 182, 212, 0.12);
+            color: var(--primary);
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 0.6px;
+            margin-bottom: 14px;
+        }
+
+        .featured-text h1 {
+            font-size: 2.05rem;
+            font-weight: 800;
+            line-height: 1.25;
+            margin-bottom: 14px;
+        }
+
+        .featured-text p {
+            color: var(--text-muted);
+            font-size: 0.98rem;
+            margin-bottom: 20px;
+        }
+
+        .meta-line {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-size: 0.84rem;
+            color: var(--text-muted);
+            margin-bottom: 22px;
+            flex-wrap: wrap;
+        }
+
+        .author-badge-inline {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .author-initials-sm {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--gradient);
+            color: #fff;
+            font-size: 0.68rem;
+            font-weight: 800;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-grad {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            width: fit-content;
+            padding: 12px 24px;
+            border-radius: 12px;
+            border: none;
+            background: var(--gradient);
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.92rem;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .featured-img {
+            min-height: 300px;
+            background: url('https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=900&q=80') center/cover no-repeat;
+        }
+
+        /* ================= BLOGGER TWO-COLUMN LAYOUT ================= */
+        .blogger-layout {
+            display: grid;
+            grid-template-columns: 2.1fr 0.9fr;
+            gap: 30px;
+            margin: 24px 0 50px;
+            align-items: start;
+        }
+
+        .cat-bar {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 22px;
+        }
+
+        .cat-chip {
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .cat-chip.active, .cat-chip:hover {
+            background: var(--primary);
+            color: #fff;
+            border-color: var(--primary);
+        }
+
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 22px;
+        }
+
+        .post-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: var(--shadow);
+        }
+
+        .post-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .post-cover {
+            width: 100%;
+            height: 175px;
+            object-fit: cover;
+        }
+
+        .post-content {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .post-label {
+            font-size: 0.72rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        .post-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            line-height: 1.35;
+            margin-bottom: 10px;
+        }
+
+        .post-snippet {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+            flex: 1;
+        }
+
+        .post-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 12px;
+            border-top: 1px solid var(--border);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .read-more-btn {
+            background: none;
+            border: none;
+            color: var(--primary);
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+
+        /* ================= BLOGGER SIDEBAR (NO PHOTOS, NO ADS) ================= */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+        }
+
+        .widget {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 22px;
+            box-shadow: var(--shadow);
+        }
+
+        .widget-title {
+            font-size: 1rem;
+            font-weight: 800;
+            margin-bottom: 14px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .author-box {
+            text-align: center;
+        }
+
+        .author-monogram {
+            width: 64px;
+            height: 64px;
+            border-radius: 18px;
+            background: var(--gradient);
+            color: #fff;
+            font-size: 1.4rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+            letter-spacing: 1px;
+        }
+
+        .popular-item {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            margin-bottom: 14px;
+            cursor: pointer;
+        }
+
+        .popular-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .popular-item img {
+            width: 58px;
+            height: 58px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+
+        .popular-item h5 {
+            font-size: 0.86rem;
+            line-height: 1.3;
+            margin-bottom: 4px;
+        }
+
+        .popular-item span {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .label-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .label-tag {
+            padding: 6px 12px;
+            border-radius: 8px;
+            background: var(--bg-body);
+            border: 1px solid var(--border);
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+        }
+
+        .label-tag:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        /* ================= 20 PHOTO FLASHCARDS HUB ================= */
+        .flashcards-section {
+            padding: 48px 0;
+            border-top: 1px solid var(--border);
+        }
+
+        .fc-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .fc-header h2 {
+            font-size: 1.85rem;
+            font-weight: 800;
+        }
+
+        .fc-controls {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .fc-select {
+            padding: 9px 14px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+            color: var(--text-main);
+            font-weight: 600;
+            font-size: 0.88rem;
+            outline: none;
+        }
+
+        .fc-btn {
+            padding: 9px 15px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+            color: var(--text-main);
+            font-weight: 600;
+            font-size: 0.86rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .fc-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .progress-strip {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 14px 20px;
+            margin-bottom: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .fc-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        /* 3D Flip Card */
+        .flip-card {
+            background: transparent;
+            height: 310px;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+
+        .flip-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+
+        .flip-card.flipped .flip-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-front, .flip-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 18px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .flip-front {
+            background: var(--bg-card);
+        }
+
+        .fc-photo {
+            width: 100%;
+            height: 145px;
+            object-fit: cover;
+        }
+
+        .fc-front-body {
+            padding: 15px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .fc-subject {
+            font-size: 0.7rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+        }
+
+        .fc-question {
+            font-size: 0.96rem;
+            font-weight: 700;
+            line-height: 1.35;
+            margin: 6px 0;
+        }
+
+        .fc-hint {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .flip-back {
+            background: linear-gradient(145deg, #0f172a 0%, #1e293b 100%);
+            color: #f8fafc;
+            transform: rotateY(180deg);
+            padding: 20px;
+            justify-content: space-between;
+        }
+
+        .fc-answer-tag {
+            font-size: 0.72rem;
+            font-weight: 800;
+            color: #38bdf8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .fc-answer-text {
+            font-size: 0.94rem;
+            line-height: 1.5;
+            color: #e2e8f0;
+        }
+
+        .master-btn {
+            padding: 8px 12px;
+            border-radius: 10px;
+            border: 1px solid rgba(56, 189, 248, 0.4);
+            background: rgba(56, 189, 248, 0.15);
+            color: #38bdf8;
+            font-weight: 700;
+            font-size: 0.78rem;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .master-btn.done {
+            background: #10b981;
+            border-color: #10b981;
+            color: #fff;
+        }
+
+        /* ================= ARTICLE READER MODAL ================= */
+        .modal-bg {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.72);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-bg.active {
+            display: flex;
+        }
+
+        .modal-card {
+            background: var(--bg-card);
+            color: var(--text-main);
+            max-width: 760px;
+            width: 100%;
+            max-height: 88vh;
+            overflow-y: auto;
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            position: relative;
+        }
+
+        .modal-banner {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(15, 23, 42, 0.8);
+            color: #fff;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .modal-inner {
+            padding: 28px 32px;
+        }
+
+        .modal-inner p {
+            margin-bottom: 14px;
+            color: var(--text-muted);
+            font-size: 0.98rem;
+            line-height: 1.75;
+        }
+
+        .comment-box {
+            margin-top: 26px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+        }
+
+        .comment-form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        .comment-form input, .comment-form textarea {
+            padding: 10px 14px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--bg-body);
+            color: var(--text-main);
+            font-size: 0.9rem;
+            outline: none;
+        }
+
+        .comment-item {
+            background: var(--bg-body);
+            padding: 12px 14px;
+            border-radius: 12px;
+            margin-top: 10px;
+            font-size: 0.88rem;
+        }
+
+        /* ================= FOOTER ================= */
+        footer {
+            background: var(--bg-card);
+            border-top: 1px solid var(--border);
+            padding: 36px 0 22px;
+        }
+
+        .footer-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 600;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        @keyframes dropIn {
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 1024px) {
+            .fc-grid { grid-template-columns: repeat(3, 1fr); }
+            .blogger-layout { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .featured-card { grid-template-columns: 1fr; }
+            .posts-grid { grid-template-columns: 1fr; }
+            .fc-grid { grid-template-columns: repeat(2, 1fr); }
+            .search-wrap { display: none; }
+        }
+
+        @media (max-width: 480px) {
+            .fc-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR WITH CUSTOM SVG LOGO & 3-LINE MENU -->
+    <header class="navbar">
+        <div class="container nav-inner">
+            <a href="#" class="brand">
+                <!-- Custom Original SVG Brand Logo -->
+                <svg width="42" height="42" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="logoGrad" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%" stop-color="#06B6D4"/>
+                            <stop offset="100%" stop-color="#2563EB"/>
+                        </linearGradient>
+                    </defs>
+                    <rect width="48" height="48" rx="14" fill="url(#logoGrad)"/>
+                    <path d="M24 12L10 19L24 26L38 19L24 12Z" fill="white"/>
+                    <path d="M15 22.5V30.5C15 33.5 19 36 24 36C29 36 33 33.5 33 30.5V22.5L24 27L15 22.5Z" fill="white" fill-opacity="0.88"/>
+                    <circle cx="37" cy="28" r="2.5" fill="#38BDF8"/>
+                </svg>
+                <div>
+                    <div class="brand-title">EduPulse</div>
+                    <div class="brand-sub">BY TIWARI</div>
+                </div>
+            </a>
+
+            <div class="nav-right">
+                <div class="search-wrap">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="blogSearch" placeholder="Search articles..." onkeyup="renderPosts()">
+                </div>
+
+                <!-- 3-Line Menu Trigger -->
+                <button class="hamburger" onclick="toggleDrawer()" aria-label="Menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Drawer Menu (Dark Mode Inside) -->
+        <div class="menu-drawer" id="menuDrawer">
+            <a href="#" class="drawer-item" onclick="toggleDrawer()"><i class="fa-solid fa-house"></i> Home</a>
+            <a href="#blog-feed" class="drawer-item" onclick="toggleDrawer()"><i class="fa-solid fa-newspaper"></i> Study Articles</a>
+            <a href="#flashcards-hub" class="drawer-item" onclick="toggleDrawer()"><i class="fa-solid fa-layer-group"></i> 20 Photo Flashcards</a>
+            <a href="#about-blog" class="drawer-item" onclick="toggleDrawer()"><i class="fa-solid fa-circle-info"></i> About </a>
+            <div class="drawer-divider"></div>
+            <div class="theme-control">
+                <span><i class="fa-solid fa-moon"></i> Dark Theme</span>
+                <button class="theme-pill" id="themeBtn" onclick="switchTheme()">Enable</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- FEATURED HERO BLOG POST -->
+    <section class="hero">
+        <div class="container">
+            <div class="featured-card">
+                <div class="featured-text">
+                    <span class="tag-pill">FEATURED GUIDE • STUDY SCIENCE</span>
+                    <h1>How Active Recall & Visual Flashcards Double Your Exam Retention</h1>
+                    <p>Discover why testing yourself with visual cues beats passive textbook re-reading, and how to organize a 30-minute daily revision routine.</p>
+                    <div class="meta-line">
+                        <span class="author-badge-inline">
+                            <span class="author-initials-sm">AT</span> Anshu Tiwari
+                        </span>
+                        <span>• Nov 12, 2026</span>
+                        <span>• 5 Min Read</span>
+                    </div>
+                    <button class="btn-grad" onclick="openPost(0)">Read Full Article <i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+                <div class="featured-img" role="img" aria-label="Student desk with open study notebook"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN BLOGGER FEED + SIDEBAR -->
+    <section class="container blogger-layout" id="blog-feed">
+        <div>
+            <!-- Category Filter Pills -->
+            <div class="cat-bar">
+                <button class="cat-chip active" onclick="filterCat('All', this)">All Posts</button>
+                <button class="cat-chip" onclick="filterCat('Study Science', this)">Study Science</button>
+                <button class="cat-chip" onclick="filterCat('Biology & Nature', this)">Biology & Nature</button>
+                <button class="cat-chip" onclick="filterCat('Physics & Space', this)">Physics & Space</button>
+                <button class="cat-chip" onclick="filterCat('Computer & Tech', this)">Computer & Tech</button>
+            </div>
+
+            <!-- Blog Posts Grid -->
+            <div class="posts-grid" id="postsGrid"></div>
+        </div>
+
+        <!-- Clean Blogger Sidebar (No Author Photo, No Ads/Affiliates) -->
+        <aside class="sidebar">
+            <!-- Author Bio Widget (Monogram Only) -->
+            <div class="widget author-box" id="about-blog">
+                <div class="author-monogram">AT</div>
+                <h4>Anshu Tiwari</h4>
+                <p style="font-size: 0.78rem; color: var(--primary); font-weight: 700; margin-bottom: 8px;">Founder, EduPulse by Tiwari</p>
+                <p style="font-size: 0.86rem; color: var(--text-muted);">Sharing clear, structured study guides, science explanations, and visual flashcards to help students learn faster.</p>
+            </div>
+
+            <!-- Popular Posts Widget -->
+            <div class="widget">
+                <h4 class="widget-title">Popular Articles</h4>
+                <div class="popular-item" onclick="openPost(1)">
+                    <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=200&q=80" alt="Lab flasks">
+                    <div>
+                        <h5>Understanding Cell Organelles Made Simple</h5>
+                        <span>Biology & Nature • 4 min</span>
+                    </div>
+                </div>
+                <div class="popular-item" onclick="openPost(2)">
+                    <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=200&q=80" alt="Galaxy">
+                    <div>
+                        <h5>Newton's Laws in Everyday Life</h5>
+                        <span>Physics & Space • 6 min</span>
+                    </div>
+                </div>
+                <div class="popular-item" onclick="openPost(3)">
+                    <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=200&q=80" alt="Laptop code">
+                    <div>
+                        <h5>How HTML, CSS & JS Power Modern Websites</h5>
+                        <span>Computer & Tech • 5 min</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Labels Widget -->
+            <div class="widget">
+                <h4 class="widget-title">Blog Labels</h4>
+                <div class="label-cloud">
+                    <span class="label-tag" onclick="quickFilter('Study Science')">#ExamPrep</span>
+                    <span class="label-tag" onclick="quickFilter('Biology & Nature')">#Biology</span>
+                    <span class="label-tag" onclick="quickFilter('Physics & Space')">#Physics</span>
+                    <span class="label-tag" onclick="quickFilter('Computer & Tech')">#WebDev</span>
+                    <span class="label-tag" onclick="quickFilter('All')">#RevisionNotes</span>
+                </div>
+            </div>
+        </aside>
+    </section>
+
+    <!-- 20 VISUAL PHOTO FLASHCARDS HUB -->
+    <section class="flashcards-section" id="flashcards-hub">
+        <div class="container">
+            <div class="fc-header">
+                <div>
+                    <span class="tag-pill">INTERACTIVE REVISION DECK</span>
+                    <h2>20 Visual Photo Flashcards</h2>
+                    <p style="color: var(--text-muted); font-size: 0.94rem;">Tap any card to flip and reveal the answer. Every card includes a real visual reference.</p>
+                </div>
+                <div class="fc-controls">
+                    <select id="fcSubjectFilter" class="fc-select" onchange="renderFlashcards()">
+                        <option value="All">All Subjects (20 Cards)</option>
+                        <option value="Biology">Biology (5)</option>
+                        <option value="Physics">Physics (4)</option>
+                        <option value="Chemistry">Chemistry (3)</option>
+                        <option value="Astronomy">Astronomy (3)</option>
+                        <option value="Computer Science">Computer Science (3)</option>
+                        <option value="Geography">Geography (2)</option>
+                    </select>
+                    <button class="fc-btn" onclick="shuffleFlashcards()"><i class="fa-solid fa-shuffle"></i> Shuffle</button>
+                    <button class="fc-btn" onclick="resetMastery()"><i class="fa-solid fa-rotate-left"></i> Reset</button>
+                </div>
+            </div>
+
+            <div class="progress-strip">
+                <span style="font-weight: 700; font-size: 0.9rem;"><i class="fa-solid fa-circle-check" style="color: #10b981;"></i> Mastery Progress: <span id="masteredCount">0</span> / 20 Cards Learned</span>
+                <span style="font-size: 0.82rem; color: var(--text-muted);">Tip: Flip a card and click "Mark as Learned" to track revision</span>
+            </div>
+
+            <div class="fc-grid" id="fcGrid"></div>
+        </div>
+    </section>
+
+    <!-- CLEAN FOOTER (SEO & POLICY LINKS FOR GOOGLE INDEXING) -->
+    <footer>
+        <div class="container">
+            <div class="footer-flex">
+                <div>
+                    <strong>EduPulse by Tiwari</strong>
+                    <p style="font-size: 0.84rem; color: var(--text-muted);">Original educational articles, study methods & visual flashcards.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#">Home</a>
+                    <a href="#blog-feed">Articles</a>
+                    <a href="#flashcards-hub">Flashcards</a>
+                    <a href="#about-blog">About</a>
+                    
+                </div>
+            </div>
+            <p style="text-align: center; font-size: 0.82rem; color: var(--text-muted); margin-top: 18px;">
+                &copy; 2026 EduPulse by Tiwari. All Rights Reserved.
+            </p>
+        </div>
+    </footer>
+
+    <!-- ARTICLE READER + COMMENTS MODAL -->
+    <div class="modal-bg" id="postModal">
+        <div class="modal-card">
+            <button class="modal-close" onclick="closePost()"><i class="fa-solid fa-xmark"></i></button>
+            <img id="mImg" class="modal-banner" src="" alt="Article Cover">
+            <div class="modal-inner">
+                <span class="tag-pill" id="mCat">CATEGORY</span>
+                <h2 id="mTitle" style="font-size: 1.65rem; margin-bottom: 8px;">Title</h2>
+                <div class="meta-line" id="mMeta">By Anshu Tiwari</div>
+                <div id="mBody"></div>
+
+                <!-- Working Reader Comments -->
+                <div class="comment-box">
+                    <h4>Reader Discussion (<span id="commentCount">1</span>)</h4>
+                    <div id="commentsList">
+                        <div class="comment-item">
+                            <strong>Rohan Verma</strong> <span style="font-size:0.75rem; color:var(--text-muted);">• 2 hours ago</span>
+                            <p style="margin:4px 0 0; font-size:0.86rem;">Very clear explanation! The visual flashcards below make revision super easy.</p>
+                        </div>
+                    </div>
+                    <form class="comment-form" onsubmit="addComment(event)">
+                        <input type="text" id="cName" placeholder="Your Name" required>
+                        <textarea id="cText" rows="2" placeholder="Write a helpful comment or question..." required></textarea>
+                        <button type="submit" class="btn-grad" style="padding: 9px 18px; font-size: 0.85rem;">Post Comment</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /* ================= BLOG POSTS DATA ================= */
+        const posts = [
+            {
+                title: "How Active Recall & Visual Flashcards Double Your Exam Retention",
+                category: "Study Science",
+                date: "Nov 12, 2026",
+                readTime: "5 min read",
+                img: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=800&q=80",
+                snippet: "Learn why testing yourself with visual cues beats passive textbook re-reading every time.",
+                body: `
+                    <p>Passive reading creates a false sense of familiarity. When you re-read highlighted lines, your brain recognizes the words, tricking you into thinking you have mastered the topic.</p>
+                    <p><strong>1. Active Recall:</strong> Close your notebook and force your brain to retrieve the answer from scratch. That mental effort strengthens neural pathways.</p>
+                    <p><strong>2. Dual Coding with Images:</strong> Pairing a question with a real-world photograph creates two memory hooks—verbal and visual—making recall significantly faster during exams.</p>
+                `
+            },
+            {
+                title: "Understanding Cell Organelles Made Simple: Powerhouse to Control Center",
+                category: "Biology & Nature",
+                date: "Nov 10, 2026",
+                readTime: "4 min read",
+                img: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=800&q=80",
+                snippet: "A crystal-clear breakdown of Mitochondria, Nucleus, Ribosomes, and Chloroplasts for quick exam revision.",
+                body: `
+                    <p>Every eukaryotic cell works like a miniature city where each organelle has a dedicated job.</p>
+                    <p><strong>Mitochondria:</strong> Converts glucose into ATP energy through cellular respiration.</p>
+                    <p><strong>Nucleus:</strong> Stores genetic DNA and regulates cell growth and division.</p>
+                    <p><strong>Ribosomes:</strong> Tiny molecular machines that assemble amino acids into essential proteins.</p>
+                `
+            },
+            {
+                title: "Newton's Three Laws of Motion Explained with Real-World Examples",
+                category: "Physics & Space",
+                date: "Nov 07, 2026",
+                readTime: "6 min read",
+                img: "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=800&q=80",
+                snippet: "From seatbelts in cars to rocket launches in space, see how classical mechanics governs motion.",
+                body: `
+                    <p><strong>First Law (Inertia):</strong> An object stays at rest or keeps moving at constant velocity unless acted upon by an unbalanced external force.</p>
+                    <p><strong>Second Law (F = ma):</strong> Acceleration depends directly on net force and inversely on mass.</p>
+                    <p><strong>Third Law (Action-Reaction):</strong> Every action force has an equal and opposite reaction force.</p>
+                `
+            },
+            {
+                title: "How HTML, CSS, and JavaScript Work Together to Build Clean Websites",
+                category: "Computer & Tech",
+                date: "Nov 04, 2026",
+                readTime: "5 min read",
+                img: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=80",
+                snippet: "Understand the three core pillars of frontend web development in plain, beginner-friendly language.",
+                body: `
+                    <p>Every modern webpage relies on three core technologies working in harmony:</p>
+                    <p><strong>HTML (Structure):</strong> Defines headings, paragraphs, images, and semantic sections for readers and search engines.</p>
+                    <p><strong>CSS (Presentation):</strong> Controls colors, dark mode themes, grid layouts, and responsive mobile spacing.</p>
+                    <p><strong>JavaScript (Interactivity):</strong> Powers live search, category filters, and interactive flashcards without page reloads.</p>
+                `
+            },
+            {
+                title: "The 50/10 Focus Block Method for Deep Study Sessions",
+                category: "Study Science",
+                date: "Nov 01, 2026",
+                readTime: "4 min read",
+                img: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=800&q=80",
+                snippet: "Why 50 minutes of uninterrupted study followed by a 10-minute screen-free break boosts productivity.",
+                body: `
+                    <p>Short 25-minute timers can sometimes interrupt your flow right when you solve a tough math or science problem.</p>
+                    <p>Working for <strong>50 focused minutes</strong> gives your brain enough runway for deep concentration, while a <strong>10-minute walk or stretch</strong> resets mental fatigue.</p>
+                `
+            }
+        ];
+
+        let selectedCategory = "All";
+
+        function renderPosts() {
+            const grid = document.getElementById("postsGrid");
+            const query = document.getElementById("blogSearch").value.toLowerCase();
+            grid.innerHTML = "";
+
+            posts.forEach((p, idx) => {
+                const matchCat = selectedCategory === "All" || p.category === selectedCategory;
+                const matchText = p.title.toLowerCase().includes(query) || p.snippet.toLowerCase().includes(query);
+
+                if (matchCat && matchText) {
+                    grid.innerHTML += `
+                        <article class="post-card">
+                            <img src="${p.img}" alt="${p.title}" class="post-cover">
+                            <div class="post-content">
+                                <span class="post-label">${p.category}</span>
+                                <h3 class="post-title">${p.title}</h3>
+                                <p class="post-snippet">${p.snippet}</p>
+                                <div class="post-bottom">
+                                    <span>By Anshu Tiwari • ${p.readTime}</span>
+                                    <button class="read-more-btn" onclick="openPost(${idx})">Read &rarr;</button>
+                                </div>
+                            </div>
+                        </article>
+                    `;
+                }
+            });
+        }
+
+        function filterCat(cat, btn) {
+            selectedCategory = cat;
+            document.querySelectorAll(".cat-chip").forEach(c => c.classList.remove("active"));
+            btn.classList.add("active");
+            renderPosts();
+        }
+
+        function quickFilter(cat) {
+            selectedCategory = cat;
+            renderPosts();
+            document.getElementById("blog-feed").scrollIntoView({ behavior: "smooth" });
+        }
+
+        function openPost(idx) {
+            const p = posts[idx];
+            document.getElementById("mImg").src = p.img;
+            document.getElementById("mCat").innerText = p.category;
+            document.getElementById("mTitle").innerText = p.title;
+            document.getElementById("mMeta").innerHTML = `<span class="author-badge-inline"><span class="author-initials-sm">AT</span> Anshu Tiwari</span> • ${p.date} • ${p.readTime}`;
+            document.getElementById("mBody").innerHTML = p.body;
+            document.getElementById("postModal").classList.add("active");
+        }
+
+        function closePost() {
+            document.getElementById("postModal").classList.remove("active");
+        }
+
+        function addComment(e) {
+            e.preventDefault();
+            const name = document.getElementById("cName").value;
+            const text = document.getElementById("cText").value;
+            const list = document.getElementById("commentsList");
+            list.innerHTML += `
+                <div class="comment-item">
+                    <strong>${name}</strong> <span style="font-size:0.75rem; color:var(--text-muted);">• Just now</span>
+                    <p style="margin:4px 0 0; font-size:0.86rem;">${text}</p>
+                </div>
+            `;
+            document.getElementById("commentCount").innerText = list.children.length;
+            e.target.reset();
+        }
+
+        /* ================= 20 REAL-PHOTO FLASHCARDS DATA ================= */
+        let flashcards = [
+            { id: 1, subject: "Biology", q: "What is the basic structural and functional unit of all living organisms?", a: "The Cell — discovered by Robert Hooke in 1665.", img: "https://images.unsplash.com/photo-1530026405186-ed1f139313f8?auto=format&fit=crop&w=600&q=80", mastered: false },
+            { id: 2, subject: "Biology", q: "Which organelle is known as the powerhouse of the cell?", a: "Mitochondria — generates ATP energy via cellular respiration.", img: "https://images.unsplash.com/photo-1576086213369-97a306d36557?auto=format&fit=crop&w=600&q=80", mastered: false },
+            { id: 3, subject: "Biology", q: "What pigment allows green plants to absorb sunlight for photosynthesis?", a: "Chlorophyll — located inside plant chloroplasts.", img: "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=600&q=80", mastered: false },
+            { id: 4, subject: "Biology", q: "Which molecule carries genetic instructions in all living cells?", a: "DNA (Deoxyribonucleic Acid) — shaped as a double helix.", img: "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=600&q=80", mastered: false },
+            { id: 5, subject: "Biology", q: "Which human organ pumps oxygenated blood throughout the body?", a: "The Heart — a four-chambered muscular organ.", img: "https://images.unsplash.com/photo-1559757175-5700dde675bc?auto=format&fit=crop&w=600&q=80", mastered: false },
+            { id: 6, subject: "Physics", q: "What is the speed of light in a vacuum?", a: "Approximately 3 × 10⁸ meters per second (299,792 km/s).", img: "https://images.unsplash.com/photo-1507413245164-6160d8298b31?auto=format&fit=crop&w=600&q=80", mastered: false },
+            { id: 7, subject: "Physics", q: "Which phenomenon splits white sunlight into seven rainbow colors?", a: "Dispersion of Light through a prism or water droplets.", img: "https://images.unsplash.com/photo-1501630834273-4b5604d2ee31?auto=format&fit=crop&w=600&q=80", mastered: false },
+            { id: 8, subject: "Physics", q: "What force keeps planets orbiting around the Sun?", a: "Gravitational Force — proportional to mass and inversely proportional to distance squared.", img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=600&q=80", mastered: false },
+            { id: 9, subject: "Physics", q: "What is Ohm's Law formula relating Voltage, Current, and Resistance?", a: "V = I × R (Voltage = Current × Resistance).", img: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80", mastered: false },
+            { id: 10, subject: "Chemistry", q: "What is the pH value of pure neutral water at 25°C?", a: "pH 7 — values below 7 are acidic, and above 7 are basic.", img: "https://images.unsplash.com/photo-1603126857599-f6e157fa2fe6?auto=format&fit=crop&w=600&q=80", mastered: false },
+            { id: 11, subject: "Chemistry", q: "Which gas makes up about 78% of Earth's atmosphere?", a: "Nitrogen (N₂) — followed by Oxygen at ~21%.", img: "https://images.unsplash.com/photo-1534088568595-a066f410bcda?auto=format&fit=crop&w=600&q=80", mastered: false },
+            { id: 12, subject: "Chemistry", q: "What is the chemical formula of table salt?", a: "NaCl (Sodium Chloride) — formed by an ionic bond.", img: "https://images.unsplash.com/photo-1518110925495-5fe2fda0442c?auto=format&fit=crop&w=600&q=80", mastered: false },
+            { id: 13, subject: "Astronomy", q: "Which is the largest planet in our Solar System?", a: "Jupiter — a gas giant with the famous Great Red Spot storm.", img: "https://images.unsplash.com/photo-1614732414444-096e5f1122d5?auto=format&fit=crop&w=600&q=80", mastered: false },
+            { id: 14, subject: "Astronomy", q: "What is the name of our home galaxy?", a: "The Milky Way — a barred spiral galaxy containing billions of stars.", img: "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=600&q=80", mastered: false },
+            { id: 15, subject: "Astronomy", q: "Which planet is famous for its prominent icy ring system?", a: "Saturn — the sixth planet from the Sun.", img: "https://images.unsplash.com/photo-1614730321146-b6fa6a46bcb4?auto=format&fit=crop&w=600&q=80", mastered: false },
+            { id: 16, subject: "Computer Science", q: "What does CPU stand for in computer architecture?", a: "Central Processing Unit — executes program instructions.", img: "https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&w=600&q=80", mastered: false },
+            { id: 17, subject: "Computer Science", q: "What number system uses only 0s and 1s?", a: "Binary Number System (Base-2) — the core language of digital computers.", img: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=600&q=80", mastered: false },
+            { id: 18, subject: "Computer Science", q: "What does HTTP stand for on the World Wide Web?", a: "HyperText Transfer Protocol — used for loading web pages.", img: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=600&q=80", mastered: false },
+            { id: 19, subject: "Geography", q: "Which is the highest mountain peak above sea level on Earth?", a: "Mount Everest (8,848.86 meters) in the Himalayas.", img: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80", mastered: false },
+            { id: 20, subject: "Geography", q: "What is the largest hot desert in the world?", a: "The Sahara Desert — spanning across North Africa.", img: "https://images.unsplash.com/photo-1509316785289-025f5b846b35?auto=format&fit=crop&w=600&q=80", mastered: false }
+        ];
+
+        function renderFlashcards() {
+            const grid = document.getElementById("fcGrid");
+            const filter = document.getElementById("fcSubjectFilter").value;
+            grid.innerHTML = "";
+
+            flashcards.forEach((card) => {
+                if (filter === "All" || card.subject === filter) {
+                    grid.innerHTML += `
+                        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                            <div class="flip-inner">
+                                <div class="flip-front">
+                                    <img src="${card.img}" alt="${card.subject}" class="fc-photo" loading="lazy">
+                                    <div class="fc-front-body">
+                                        <div>
+                                            <span class="fc-subject">#${card.id} • ${card.subject}</span>
+                                            <div class="fc-question">${card.q}</div>
+                                        </div>
+                                        <div class="fc-hint">
+                                            <span>Tap to flip <i class="fa-solid fa-rotate"></i></span>
+                                            ${card.mastered ? '<span style="color:#10b981;font-weight:700;">✓ Learned</span>' : ''}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flip-back">
+                                    <div>
+                                        <span class="fc-answer-tag">Answer</span>
+                                        <p class="fc-answer-text" style="margin-top:10px;">${card.a}</p>
+                                    </div>
+                                    <button class="master-btn ${card.mastered ? 'done' : ''}" onclick="toggleMaster(event, ${card.id})">
+                                        ${card.mastered ? '✓ Learned' : 'Mark as Learned'}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+            });
+            updateProgress();
+        }
+
+        function toggleMaster(e, id) {
+            e.stopPropagation();
+            const card = flashcards.find(c => c.id === id);
+            card.mastered = !card.mastered;
+            renderFlashcards();
+        }
+
+        function updateProgress() {
+            const count = flashcards.filter(c => c.mastered).length;
+            document.getElementById("masteredCount").innerText = count;
+        }
+
+        function shuffleFlashcards() {
+            for (let i = flashcards.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [flashcards[i], flashcards[j]] = [flashcards[j], flashcards[i]];
+            }
+            renderFlashcards();
+        }
+
+        function resetMastery() {
+            flashcards.forEach(c => c.mastered = false);
+            renderFlashcards();
+        }
+
+        /* ================= MENU & DARK THEME TOGGLE ================= */
+        function toggleDrawer() {
+            document.getElementById("menuDrawer").classList.toggle("open");
+        }
+
+        function switchTheme() {
+            const html = document.documentElement;
+            const btn = document.getElementById("themeBtn");
+            if (html.getAttribute("data-theme") === "light") {
+                html.setAttribute("data-theme", "dark");
+                btn.innerText = "Disable";
+            } else {
+                html.setAttribute("data-theme", "light");
+                btn.innerText = "Enable";
+            }
+        }
+
+        // Initial Load
+        renderPosts();
+        renderFlashcards();
+    </script>
+</body>
+</html>
